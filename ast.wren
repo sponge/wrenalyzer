@@ -16,7 +16,7 @@ class Module is Node {
   toString { "Module(%(_statements))" }
 }
 
-class MapEntry {
+class WMapEntry {
   construct new(key, value) {
     _key = key
     _value = value
@@ -37,11 +37,22 @@ class Method {
     _body = body
   }
 
+  construct new(foreignKeyword, staticKeyword, constructKeyword, name, body, parameters) {
+    _foreignKeyword = foreignKeyword
+    _staticKeyword = staticKeyword
+    _constructKeyword = constructKeyword
+    _name = name
+    _body = body
+    _parameters = parameters
+  }
+
+
   foreignKeyword { _foreignKeyword }
   staticKeyword { _staticKeyword }
   constructKeyword { _constructKeyword }
   name { _name }
   body { _body }
+  parameters { _parameters }
 
   accept(visitor) { visitor.visitMethod(this) }
 

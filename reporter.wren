@@ -1,10 +1,15 @@
-import "token" for Token
+import "./token" for Token
 
 // ANSI color escapes.
 var RED = "\x1b[31m"
 var CYAN = "\x1b[36m"
 var GRAY = "\x1b[30;1m"
 var NORMAL = "\x1b[0m"
+
+class NullReporter {
+  construct new() {}
+  error(message, token) { }
+}
 
 /// Reports analysis results in an easily machine-parseable form.
 class JsonReporter {

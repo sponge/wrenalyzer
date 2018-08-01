@@ -1,4 +1,4 @@
-import "ast" for
+import "./ast" for
     AssignmentExpr,
     BlockStmt,
     Body,
@@ -15,7 +15,7 @@ import "ast" for
     InfixExpr,
     InterpolationExpr,
     ListExpr,
-    MapEntry,
+    WMapEntry,
     MapExpr,
     Method,
     Module,
@@ -30,8 +30,8 @@ import "ast" for
     ThisExpr,
     VarStmt,
     WhileStmt
-import "lexer" for Lexer
-import "token" for Token
+import "./lexer" for Lexer
+import "./token" for Token
 
 var EQUALITY_OPERATORS = [
   Token.equalEqual,
@@ -252,7 +252,7 @@ class Parser {
       body = finishBody(parameters)
     }
 
-    return Method.new(foreignKeyword, staticKeyword, constructKeyword, name, body)
+    return Method.new(foreignKeyword, staticKeyword, constructKeyword, name, body, parameters)
   }
 
   statement() {
@@ -611,7 +611,7 @@ class Parser {
       consume(Token.colon, "Expect ':' after map key.")
 
       var value = expression()
-      entries.add(MapEntry.new(key, value))
+      entries.add(WMapEntry.new(key, value))
 
       ignoreLine()
       if (!match(Token.comma)) break
